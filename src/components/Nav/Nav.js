@@ -11,7 +11,7 @@ class Nav extends Component {
     
     render() {
        
-      console.log(this.props)
+      
 
             return (
                 
@@ -37,10 +37,9 @@ class Nav extends Component {
 function mapStateToProps (reduxState) {
     const { username, profilePic } = reduxState
     return {
-        username
+        username,
+        profilePic
     }
 };
 
 export default connect( mapStateToProps )(Nav) 
-
-profilePic: {}

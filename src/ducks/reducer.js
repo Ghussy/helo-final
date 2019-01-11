@@ -4,22 +4,33 @@ const initialState = {
     profilePic: {}
 }
 
-const GET_USER_DATA = 'GET_USER_DATA'
+const UPDATE_USERNAME = 'UPDATE_USERNAME'
+const UPDATE_PROFILEPIC = 'UPDATE_PROFILEPIC'
 
-
-export function getUserData(userId, username, profilePic) {
+export function updateUsername(username) {
     return {
-        type: GET_USER_DATA,
-        payload: {username, userId, profilePic}
+        type: UPDATE_USERNAME,
+        payload: username
     }
 }
 
+export function updateProfilePic(profilePic) {
+    return {
+        type: UPDATE_PROFILEPIC,
+        payload: profilePic
+    }
+}
+
+
 export default function reducer(state = initialState , action) {
-    console.log('reducer function hit')
+  
     switch(action.type) {
-        case GET_USER_DATA: 
-            return { ...state, username: action.payload.username}
-        default: 
-            return state;
+        case UPDATE_USERNAME: {
+            return Object.assign({}, state, { username: action.payload })
+        }
+        case UPDATE_PROFILEPIC: {
+            return Object.assign({}, state, { profilePic: action.payload })
+        }
+            default: return Object.assign({}, state)
     }
 }

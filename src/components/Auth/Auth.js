@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { getUserData } from '../../ducks/reducer'
+import { updateUsername, updateProfilePic }  from '../../ducks/reducer'
 
 
 class Auth extends Component {
@@ -16,7 +16,8 @@ class Auth extends Component {
     async register() {
         const { username, password } = this.state
        let res = await axios.post('/create-user', {username: username, password: password})
-       this.props.getUserData(res.data)
+       this.props.updateUsername(res.data.user.username)
+       this.props.updateProfilePic(res.data.user.profile_pic)
        if (res.data.loggedIn) {
            this.props.history.push('/dashboard')
            console.log(res.data.message)
@@ -26,7 +27,8 @@ class Auth extends Component {
    async login() {
        const { username, password } = this.state
        const res = await axios.post('/login', { username: username, password: password})
-       this.props.getUserData(res.data)
+       this.props.updateUsername(res.data.user.username)
+       this.props.updateProfilePic(res.data.user.profile_pic)
         if (res.data.loggedIn) {
             this.props.history.push('/dashboard')
             console.log(res.data.message)
@@ -59,7 +61,7 @@ render() {
 }
 
 
-export default connect(null, {getUserData})(Auth)
+export default connect(null, {updateUsername, updateProfilePic})(Auth)
 
 
 

@@ -23,8 +23,8 @@ module.exports = {
         } else {
             if (accountArr[0].password === password) 
                 {
-                
-                res.status(200).send({ message: 'logged in', loggedIn: true })
+                let newUser = accountArr[0];
+                res.status(200).send({ message: 'logged in',user: newUser, loggedIn: true })
                 } else 
                 { return res.status(200).send({ message: 'Password does not match Username' }); }
         }
